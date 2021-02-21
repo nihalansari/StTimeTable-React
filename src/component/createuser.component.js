@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {ACCESS_TOKEN_NAME} from "../constants";
+import {ACCESS_TOKEN_NAME, API_BASE_URL} from "../constants";
 
 export default class CreateUser extends Component {
     constructor(props) {
@@ -11,10 +11,12 @@ export default class CreateUser extends Component {
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
+
         this.state = {
             username: '',
             email: '',
             password: ''
+
         }
     }
 
@@ -43,7 +45,11 @@ export default class CreateUser extends Component {
 
         console.log(user);
 
-        axios.post('http://localhost:3000/users/add', user)
+        axios.post(localStorage.getItem(API_BASE_URL) + '/users/add',user,{
+            headers: {
+                'Authorization': localStorage.getItem(ACCESS_TOKEN_NAME)
+            }
+        })
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
 
@@ -86,8 +92,10 @@ export default class CreateUser extends Component {
                     <div className="form-group">
                         <input type="submit" value="Create User" className="btn btn-primary" />
                     </div>
+
                 </form>
             </div>
+
         )
     }
 }

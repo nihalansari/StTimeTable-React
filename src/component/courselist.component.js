@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import {Link} from "react-router-dom";
-import {ACCESS_TOKEN_NAME} from "../constants";
+import {ACCESS_TOKEN_NAME, API_BASE_URL} from "../constants";
 
 
 export default class showCourseDetails extends Component {
@@ -21,7 +21,7 @@ export default class showCourseDetails extends Component {
 
     componentDidMount() {
 
-        axios.get('http://localhost:3000/classdetails/courses' ,{ headers: { 'Authorization': localStorage.getItem(ACCESS_TOKEN_NAME) }})
+        axios.get( localStorage.getItem(API_BASE_URL) + '/classdetails/courses' ,{ headers: { 'Authorization': localStorage.getItem(ACCESS_TOKEN_NAME) }})
             .then(response => {
                 if (response.data.length > 0) {
                     this.setState({
@@ -48,7 +48,7 @@ export default class showCourseDetails extends Component {
     onSubmit(e) {
         e.preventDefault();
         console.log("Course ID selected is: " + this.state.coursename)
-        axios.get('http://localhost:3000/classdetails/students?courseid=' + this.state.coursename,{ headers: { 'Authorization': localStorage.getItem(ACCESS_TOKEN_NAME) }})
+        axios.get(localStorage.getItem(API_BASE_URL) + '/classdetails/students?courseid=' + this.state.coursename,{ headers: { 'Authorization': localStorage.getItem(ACCESS_TOKEN_NAME) }})
             .then(response => {
                 if (response.data.length > 0) {
                     this.setState({

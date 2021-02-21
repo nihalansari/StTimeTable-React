@@ -1,0 +1,4 @@
+applications:
+- name: StTimeTable-react
+  random-route: true
+  memory: 192M  

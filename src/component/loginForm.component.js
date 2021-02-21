@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {ACCESS_TOKEN_NAME} from "../constants";
+import {ACCESS_TOKEN_NAME, API_BASE_URL} from "../constants";
 import auth from "./auth";
 
 export default class LoginForm extends Component {
     constructor(props) {
+        localStorage.setItem(API_BASE_URL,"https://studenttimetable-node.mybluemix.net");
+        //localStorage.setItem(API_BASE_URL,"http://localhost:3000");
+
         super(props);
 
         this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -38,8 +41,8 @@ export default class LoginForm extends Component {
             }
 
             console.log(user);
-
-            axios.post('http://localhost:3000/login', user)
+            console.log(localStorage.getItem(API_BASE_URL));
+            axios.post(localStorage.getItem(API_BASE_URL) + '/login', user)
                 .then(res => {
                     console.log(res.data)
                     //localStorage.setItem(ACCESS_TOKEN_NAME,res.data.token);
