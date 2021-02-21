@@ -17,6 +17,10 @@ export default class Navbar extends Component {
                             <Link to="/user" className="nav-link">Create User</Link>
                         </li>
                         <li className="navbar-item">
+                            <Link to="/existingusers" className="nav-link">Existing Users</Link>
+                        </li>
+
+                        <li className="navbar-item">
                             <Link to="/" className="nav-link" onClick={()=> auth.logout(() => {console.log("logged out")}) }>Logout</Link>
                         </li>
 

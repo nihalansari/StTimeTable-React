@@ -6,6 +6,7 @@ import Navbar from "./component/navbar.component";
 import CourseList from "./component/courselist.component";
 import CreateUser from "./component/createuser.component";
 import LoginForm from "./component/loginForm.component";
+import QueryUser from "./component/queryuser.component";
 import { ProtectedRoute } from "./component/protectedroute";
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
       <Route path="/" exact component = {LoginForm} />
       <ProtectedRoute exact path="/course" component = {CourseList} />
       <ProtectedRoute exact path="/user" component = {CreateUser} />
+      <ProtectedRoute exact path="/existingusers" component = {QueryUser} />
+
       </Router>
   );
 }
